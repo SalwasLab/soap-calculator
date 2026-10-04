@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>حاسبة الصابون | معمل الطبيعة</title>
+<link rel="icon" href="logo.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Tajawal:wght@400;500;700;800&display=swap">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<main class="sheet" dir="rtl" lang="ar">
+
+  <div class="brand">
+    <img class="brand-logo" src="logo.jpg" width="120" height="103" alt="شعار معمل الطبيعة">
+    <div class="brand-text">
+      <p class="brand-name">معمل الطبيعة</p>
+      <p class="brand-course"><span>دورة الصابون</span><span>المدربة: سلوى شرف</span></p>
+      <a class="brand-site" href="https://www.salwalab.com" target="_blank" rel="noopener" dir="ltr">www.salwalab.com</a>
+    </div>
+  </div>
+  <hr class="rule brand-rule">
+
+  <header class="top">
+    <h1>حاسبة الصابون</h1>
+    <label class="recipe-name" for="recipeName">
+      <span>اسم الوصفة:</span>
+      <input id="recipeName" type="text" placeholder="أدخل اسم الوصفة" autocomplete="off">
+    </label>
+  </header>
+  <p class="subtitle">ابنِ وصفة متوازنة بالنسب الصحيحة من الزيوت والقلوي والماء.</p>
+  <hr class="rule">
+
+  <div class="grid">
+
+    <!-- 1 -->
+    <section class="box" aria-labelledby="h-lye">
+      <h2 id="h-lye">1. نوع القلوي <button class="q" type="button" aria-expanded="false" aria-controls="help-lye" aria-label="شرح نوع القلوي">؟</button></h2>
+      <div class="help" id="help-lye" hidden>
+        <p>اختر نوع القلوي الذي ستستخدمه.</p>
+        <p>هيدروكسيد الصوديوم (NaOH)، أو الصودا الكاوية، لصنع قوالب الصابون الصلبة.</p>
+        <p>هيدروكسيد البوتاسيوم (KOH) لصنع الصابون السائل. طريقته أطول: يُطبخ عجين الصابون أولًا، ثم يُخفف بكمية ثانية من الماء. إذا كانت نقاوة البوتاس لديك 90% فعلّم خانة «KOH بنقاوة 90%».</p>
+      </div>
+      <div class="stack">
+        <label class="radio"><input type="radio" name="lye" id="lyeNaoh" value="naoh" checked> <bdi>NaOH</bdi> (هيدروكسيد الصوديوم)</label>
+        <label class="radio"><input type="radio" name="lye" id="lyeKoh" value="koh"> <bdi>KOH</bdi> (هيدروكسيد البوتاسيوم)</label>
+        <label class="radio muted" id="koh90Label"><input type="checkbox" id="koh90" disabled> <bdi>KOH</bdi> بنقاوة 90%</label>
+      </div>
+    </section>
+
+    <!-- 2 -->
+    <section class="box" aria-labelledby="h-weight">
+      <h2 id="h-weight">2. وزن الزيوت <button class="q" type="button" aria-expanded="false" aria-controls="help-weight" aria-label="شرح وزن الزيوت">؟</button></h2>
+      <div class="help" id="help-weight" hidden>
+        <p>أدخل الوزن الإجمالي لكل الزيوت والدهون في الوصفة، بالرطل أو الأونصة أو الغرام.</p>
+        <p>أيًّا كانت الوحدة التي تختارها، يعرض ملخص الوصفة النتائج بالأرطال والأونصات والغرامات معًا.</p>
+      </div>
+      <div class="stack">
+        <select id="unit" aria-label="وحدة الوزن">
+          <option value="lb">أرطال</option>
+          <option value="oz">أونصات</option>
+          <option value="g" selected>غرامات</option>
+        </select>
+        <div class="group">
+          <input id="oilWeight" type="text" inputmode="decimal" value="500" aria-label="الوزن الإجمالي للزيوت">
+          <span class="addon" data-unit>غ</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3 -->
+    <section class="box" aria-labelledby="h-water">
+      <h2 id="h-water">3. الماء <button class="q" type="button" aria-expanded="false" aria-controls="help-water" aria-label="شرح حساب الماء">؟</button></h2>
+      <div class="help" id="help-water" hidden>
+        <p>اختر كيف تريد تحديد كمية الماء الذي يُذاب فيه القلوي:</p>
+        <p><b>الماء كنسبة من الزيوت:</b> الأسهل. 38% بداية مريحة للمبتدئين؛ 500 غ زيوت تعني 190 غ ماء. نسبة أقل تعني صابونًا يجف أسرع لكنه يتماسك أسرع أيضًا.</p>
+        <p><b>تركيز القلوي:</b> وزن القلوي مقسومًا على وزن المحلول كله (قلوي + ماء). القيم الشائعة بين 28% و40%.</p>
+        <p><b>نسبة الماء إلى القلوي:</b> اكتبها بالشكل 2:1، أي جزأين من الماء لكل جزء من القلوي.</p>
+      </div>
+      <div class="stack">
+        <label for="waterMode">اختر طريقة حساب الماء:</label>
+        <select id="waterMode">
+          <option value="pct" selected>الماء كنسبة من الزيوت</option>
+          <option value="conc">تركيز القلوي</option>
+          <option value="ratio">نسبة الماء إلى القلوي</option>
+        </select>
+        <label for="waterValue" id="waterValueLabel">أدخل النسبة % (مثلًا 38)</label>
+        <input id="waterValue" type="text" inputmode="decimal" value="38">
+      </div>
+    </section>
+
+    <!-- 4 -->
+    <section class="box" aria-labelledby="h-extra">
+      <h2 id="h-extra">4. إعدادات إضافية <button class="q" type="button" aria-expanded="false" aria-controls="help-extra" aria-label="شرح الإعدادات الإضافية">؟</button></h2>
+      <div class="help" id="help-extra" hidden>
+        <p><b>الدهن الزائد:</b> النسبة التي نُبقيها من الزيوت دون تصبّن، بإنقاص القلوي عمدًا. تحمي الصابون من أن يكون حارقًا إذا اختلفت الزيوت أو الموازين قليلًا، وتجعله ألطف على البشرة. معظم الصانعين يستخدمون 5%.</p>
+        <p><b>العطر:</b> أدخل معدل الاستخدام، وتحسب الحاسبة الكمية من وزن الزيوت. المعدل الشائع 30–40 غ لكل كيلوغرام زيوت. الزيوت العطرية الطبيعية مركّزة أكثر، فابدأ معها بكمية أقل، واتبع توصية المورّد إن وُجدت.</p>
+      </div>
+      <div class="form-rows">
+        <label for="superfat">الدهن الزائد (%)</label>
+        <div class="group">
+          <input id="superfat" type="text" inputmode="decimal" value="5">
+          <span class="addon">%</span>
+        </div>
+        <label for="fragRate" id="fragRateLabel">العطر (غ/كغ)</label>
+        <input id="fragRate" type="text" inputmode="decimal" value="31">
+        <label for="fragAmount">كمية العطر</label>
+        <div class="group">
+          <input id="fragAmount" type="text" value="15.5" readonly>
+          <span class="addon" data-unit>غ</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5 -->
+    <section class="box" aria-labelledby="h-oils">
+      <h2 id="h-oils">5. اختيار الزيوت والدهون والشموع <button class="q" type="button" aria-expanded="false" aria-controls="help-oils" aria-label="شرح اختيار الزيوت">؟</button></h2>
+      <div class="help" id="help-oils" hidden>
+        <p>عمود <b>المحدد</b> يعرض خصائص الزيت الذي اخترته في القائمة، وعمود <b>الكل</b> يعرض خصائص وصفتك كاملة ويتحدّث وحده مع كل تعديل.</p>
+        <p>مرّر المؤشر فوق اسم أي خاصية أو حمض دهني، أو المسه على الهاتف، لترى ماذا يعني والمدى المقترح له.</p>
+        <p>«مشبع : غير مشبع» تقارن الدهون الصلبة بالسائلة في الزيت المحدد. كثير من الوصفات تقع قرب 40 : 60.</p>
+      </div>
+      <div class="oils-layout">
+        <table class="props">
+          <thead>
+            <tr><th scope="col"><span class="sr-only">الخاصية</span></th><th scope="col">المحدد</th><th scope="col">الكل</th></tr>
+          </thead>
+          <tbody id="propRows"></tbody>
+        </table>
+        <div class="picker">
+          <label for="oilSelect" class="picker-label">الزيوت والدهون والشموع</label>
+          <input id="oilJump" type="text" placeholder="انتقل إلى زيت…" autocomplete="off" aria-label="انتقل إلى زيت">
+          <select id="oilSelect" size="19"></select>
+          <table class="sap">
+            <tr><th scope="row">قيمة تصبّن <bdi>KOH</bdi></th><td id="sapKoh">—</td></tr>
+            <tr><th scope="row">قيمة تصبّن <bdi>NaOH</bdi></th><td id="sapNaoh">—</td></tr>
+            <tr><th scope="row">مشبع : غير مشبع</th><td id="satRatio">لا توجد بيانات</td></tr>
+          </table>
+        </div>
+      </div>
+      <div class="center">
+        <button type="button" class="btn dark" id="addOil">أضف إلى الوصفة</button>
+      </div>
+    </section>
+
+    <!-- 6 -->
+    <section class="box" aria-labelledby="h-recipe">
+      <div class="box-head">
+        <h2 id="h-recipe">6. قائمة زيوت الوصفة <button class="q" type="button" aria-expanded="false" aria-controls="help-recipe" aria-label="شرح قائمة زيوت الوصفة">؟</button></h2>
+        <button type="button" class="btn small outline" id="resetAll">إعادة تعيين الكل</button>
+      </div>
+      <div class="help" id="help-recipe" hidden>
+        <p><b>لإضافة زيت:</b> اختره من القائمة وانقر عليه نقرًا مزدوجًا، أو اضغط زر «أضف إلى الوصفة» أسفل قيم التصبّن. يمكنك أيضًا الضغط على زر <b>+</b> الأخضر بجانب أي خانة لوضع الزيت المحدد فيها.</p>
+        <p><b>لحذف زيت:</b> اضغط زر <b>−</b> الأحمر بجانبه.</p>
+        <p>لمسح كل الزيوت والبدء من جديد، اضغط «إعادة تعيين الكل».</p>
+      </div>
+      <table class="recipe">
+        <thead>
+          <tr>
+            <th scope="col"><span class="sr-only">إضافة وحذف</span></th>
+            <th scope="col">اسم الزيت</th>
+            <th scope="col">%</th>
+            <th scope="col">الوزن (<span data-unit-en>غ</span>)</th>
+          </tr>
+        </thead>
+        <tbody id="recipeRows"></tbody>
+        <tfoot>
+          <tr>
+            <td></td>
+            <th scope="row">المجموع</th>
+            <td id="totalPct">0.00%</td>
+            <td id="totalWt">0.000<span data-unit>غ</span></td>
+          </tr>
+        </tfoot>
+      </table>
+      <p class="warn" id="recipeMsg" role="status">يجب أن يكون مجموع النسب 100%. المجموع الحالي <b>0.00%</b>.</p>
+      <button type="button" class="btn dark block" id="viewSummary" disabled>عرض ملخص الوصفة</button>
+      <label class="radio tabs-opt"><input type="checkbox" id="newTab"> فتح الملخص في تبويب جديد</label>
+    </section>
+
+  </div>
+
+  <div class="load-row">
+    <label class="btn small green-outline file" for="loadJson">تحميل وصفة (JSON)
+      <input id="loadJson" type="file" accept="application/json,.json" class="sr-only">
+    </label>
+  </div>
+
+  <!-- Recipe summary (filled by summary.js) -->
+  <section id="summary" class="summary" hidden aria-label="ملخص الوصفة">
+    <div class="sum-bar">
+      <div class="sum-actions">
+        <button type="button" class="btn grey" data-act="edit">تعديل الوصفة</button>
+        <button type="button" class="btn outline-dark" data-act="json">تصدير الوصفة (JSON)</button>
+        <button type="button" class="btn green-outline" data-act="pdf">حفظ كملف PDF</button>
+        <button type="button" class="btn outline-tan" data-act="inci">أسماء INCI</button>
+        <button type="button" class="btn dark" data-act="print">طباعة</button>
+      </div>
+      <div class="sum-opts">
+        <label class="radio"><input type="checkbox" id="printCharts"> تضمين الرسوم البيانية في الطباعة</label>
+        <label class="radio"><input type="checkbox" id="printPlain"> طباعة بدون ألوان</label>
+      </div>
+    </div>
+    <p class="sum-note" id="sumNote" role="status" hidden></p>
+    <div id="jsonBox" class="json-box" hidden>
+      <label for="jsonText">انسخ هذا النص واحفظه في ملف باسم <bdi>soap-recipe.json</bdi>:</label>
+      <textarea id="jsonText" readonly rows="8" dir="ltr"></textarea>
+      <div class="sum-actions">
+        <button type="button" class="btn small dark" id="copyJson">نسخ</button>
+        <button type="button" class="btn small outline" id="closeJson">إغلاق</button>
+      </div>
+    </div>
+    <div id="sumBody" class="sum-body"></div>
+    <div class="sum-notes">
+      <label for="additives">الإضافات
+        <textarea id="additives" rows="5" placeholder="ملاحظات للطباعة (مثل الملوّنات والأعشاب والطين)"></textarea>
+        <span class="print-text" data-for="additives"></span>
+      </label>
+      <label for="notes">ملاحظات
+        <textarea id="notes" rows="5" placeholder="ملاحظات للطباعة (مثل مدة التجفيف وبيانات الدفعة)"></textarea>
+        <span class="print-text" data-for="notes"></span>
+      </label>
+    </div>
+    <div class="sum-actions bottom">
+      <button type="button" class="btn grey" data-act="edit">تعديل الوصفة</button>
+      <button type="button" class="btn green-outline" data-act="pdf">حفظ كملف PDF</button>
+      <button type="button" class="btn dark" data-act="print">طباعة</button>
+    </div>
+  </section>
+
+  <!-- INCI names -->
+  <section id="inciView" class="summary" hidden aria-labelledby="h-inci">
+    <h2 id="h-inci" class="inci-title">أسماء INCI</h2>
+    <table class="sum-table inci-table">
+      <thead><tr><th scope="col">نسبة الوصفة</th><th scope="col">الاسم الشائع</th><th scope="col">اسم INCI</th></tr></thead>
+      <tbody id="inciRows"></tbody>
+    </table>
+    <h3 class="inci-sub">قائمة أسماء INCI (مرتبة تنازليًا حسب النسبة)</h3>
+    <p id="inciList" class="inci-list" dir="ltr"></p>
+    <div class="sum-actions">
+      <button type="button" class="btn dark" id="copyInci">نسخ قائمة INCI</button>
+      <button type="button" class="btn grey" id="backFromInci">العودة إلى الوصفة</button>
+    </div>
+  </section>
+
+  <footer class="foot">
+    <span>© معمل الطبيعة</span>
+    <a href="https://www.salwalab.com" target="_blank" rel="noopener" dir="ltr">www.salwalab.com</a>
+  </footer>
+
+</main>
+<div class="tip" id="tip" role="tooltip" dir="rtl" lang="ar" hidden></div>
+<script src="logo.js"></script>
+<script src="oils.js"></script>
+<script src="calc.js"></script>
+<script src="summary.js"></script>
+</body>
+</html>

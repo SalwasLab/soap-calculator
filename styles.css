@@ -1,0 +1,297 @@
+/* Layout: white sheet on a cream page; a 2-column grid of grey boxes (1|2, 3|4, 5|6), mirrored for RTL.
+   Single light theme, matching the reference screenshot. */
+:root {
+  --page: #f5f0e4;        /* cream page edge */
+  --sheet: #ffffff;
+  --box: #f6f7f9;         /* panel fill */
+  --box-line: #c9ccd1;    /* panel border */
+  --rule: #d8ccb6;        /* tan dividers */
+  --row-line: #e3dacb;    /* recipe row lines */
+  --ink: #212529;
+  --muted: #6c757d;
+  --field-line: #ced4da;
+  --field-off: #e9ecef;
+  --help: #1d3fd8;        /* the blue “?” */
+  --dark: #1f4a37;        /* dark green buttons */
+  --plus: #198754;
+  --minus: #dc3545;
+  --select: #d4d4d4;      /* selected oil row */
+  --jump: #e3c39d;        /* “jump to oil” border */
+  --brand: #156b3a;       /* logo green */
+  --tip-bg: #212529;
+  --tip-ink: #ffffff;
+
+  --font: "Poppins", "Tajawal", "Segoe UI", Tahoma, Arial, sans-serif;
+  color-scheme: light;
+}
+
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--page);
+  color: var(--ink);
+  font: 400 14px/1.5 var(--font);
+  padding-inline: 16px;
+  padding-block: 24px 48px;
+}
+.sheet {
+  max-width: 940px; margin-inline: auto; background: var(--sheet);
+  padding: 28px 28px 32px; border-inline: 1px solid #ece4d3;
+}
+.sr-only {
+  position: absolute !important; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+[hidden] { display: none !important; }
+:focus-visible { outline: 2px solid #86b7fe; outline-offset: 1px; }
+
+/* Brand (معمل الطبيعة) */
+.brand { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; }
+.brand-logo { width: 120px; height: auto; max-width: 100%; flex: none; }
+.brand-text { display: grid; gap: 4px; min-width: 0; }
+.brand-name { margin: 0; font: 800 1.6rem/1.2 var(--font); color: var(--brand); }
+.brand-course { margin: 0; display: flex; flex-wrap: wrap; gap: 4px 14px; font-size: .98rem; color: #3d4a42; }
+.brand-course span + span { padding-inline-start: 14px; border-inline-start: 1px solid var(--rule); }
+.brand-site { color: var(--brand); font-weight: 600; text-decoration: none; justify-self: start; }
+.brand-site:hover { text-decoration: underline; }
+.brand-rule { margin: 14px 0 18px; }
+.foot {
+  margin-top: 24px; padding-top: 12px; border-top: 1px solid var(--rule);
+  display: flex; justify-content: center; gap: 14px; flex-wrap: wrap; font-size: .85rem; color: var(--muted);
+}
+.foot a { color: var(--brand); text-decoration: none; font-weight: 600; }
+.foot a:hover { text-decoration: underline; }
+
+/* Header */
+.top { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 24px; }
+h1 { margin: 0; font: 500 1.95rem/1.2 var(--font); }
+.recipe-name { display: flex; align-items: center; gap: 8px; flex: 0 1 380px; min-width: 0; }
+.recipe-name span { font-weight: 700; font-size: .9rem; white-space: nowrap; }
+.subtitle { margin: 10px 0 0; color: #5d5a55; font-size: .98rem; }
+.rule { border: 0; border-top: 1px solid var(--rule); margin: 18px 0 20px; }
+
+/* Grid of boxes */
+.grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px 24px; align-items: stretch; }
+.box {
+  background: var(--box); border: 1px solid var(--box-line); border-radius: 2px;
+  padding: 14px 14px 16px; min-width: 0; display: flex; flex-direction: column; gap: 12px;
+}
+.box h2 { margin: 0; font: 700 1.08rem/1.3 var(--font); }
+.box-head { display: flex; justify-content: space-between; align-items: center; gap: 8px; flex-wrap: wrap; }
+.q {
+  border: 0; background: none; padding: 0 2px; color: var(--help); font: 700 .8rem/1 var(--font);
+  vertical-align: super; cursor: pointer;
+}
+.help { background: #fff; border: 1px solid var(--box-line); border-radius: 4px; padding: 10px 12px; font-size: .88rem; }
+.help p { margin: 0; }
+.help p + p { margin-top: 6px; }
+
+/* Fields */
+input[type="text"], select {
+  font: inherit; color: var(--ink); background: #fff; border: 1px solid var(--field-line);
+  border-radius: 6px; padding: 6px 12px; width: 100%; min-width: 0; height: 36px;
+}
+input:focus, select:focus { outline: none; border-color: #86b7fe; box-shadow: 0 0 0 3px rgba(13, 110, 253, .2); }
+input[readonly] { background: var(--field-off); }
+input:disabled { background: var(--field-off); border-color: #d6d9dc; }
+select {
+  appearance: none; -webkit-appearance: none; padding-left: 34px; padding-right: 12px; cursor: pointer;
+  direction: rtl; text-align: right;
+  background: #fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3E%3C/svg%3E") no-repeat left 12px center / 12px 10px;
+}
+.stack { display: flex; flex-direction: column; gap: 10px; }
+.stack > label { font-size: .9rem; }
+.group { display: flex; }
+.group input { border-start-end-radius: 0; border-end-end-radius: 0; }
+.addon {
+  display: grid; place-items: center; min-width: 32px; padding-inline: 10px; background: var(--field-off);
+  border: 1px solid var(--field-line); border-inline-start: 0; border-start-end-radius: 6px; border-end-end-radius: 6px;
+  font-size: .9rem;
+}
+input[inputmode="decimal"], #fragAmount { direction: ltr; text-align: right; }
+
+.radio { display: flex; align-items: center; gap: 8px; font-size: .92rem; cursor: pointer; }
+.radio input { width: 16px; height: 16px; margin: 0; accent-color: #0d6efd; }
+.radio.muted { color: #adb5bd; cursor: default; }
+
+.form-rows { display: grid; grid-template-columns: minmax(110px, auto) minmax(0, 1fr); gap: 10px 14px; align-items: center; }
+.form-rows > label { font-size: .9rem; }
+
+/* Box 5 */
+.oils-layout { display: grid; grid-template-columns: minmax(0, 150px) minmax(0, 1fr); gap: 12px; align-items: start; }
+table { border-collapse: collapse; }
+.props { width: 100%; font-size: .9rem; }
+.props th, .props td { padding: 8px 0; border-bottom: 1px solid #d9dce0; }
+.props thead th { border: 0; font-weight: 700; font-size: .85rem; padding-bottom: 4px; text-align: center; }
+.props tbody th { text-align: start; font-weight: 700; cursor: help; }
+.props td { text-align: center; font-variant-numeric: tabular-nums; width: 34px; }
+.props td.off { color: var(--minus); font-weight: 600; }
+
+.picker { display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+.picker-label { font-size: .88rem; }
+#oilJump { border-color: var(--jump); height: 32px; font-size: .85rem; }
+#oilSelect {
+  height: auto; padding: 4px; background-image: none; border-radius: 2px; font-size: .9rem; line-height: 1.5;
+  overflow-y: auto;
+}
+#oilSelect option { padding: 1px 8px; }
+#oilSelect option:checked { background: var(--select) linear-gradient(var(--select), var(--select)); color: var(--ink); }
+.sap { width: 100%; font-size: .88rem; }
+.sap th, .sap td { padding: 9px 0; border-bottom: 1px solid #d9dce0; text-align: start; }
+.sap th { font-weight: 700; width: 55%; }
+.sap td { color: #495057; font-variant-numeric: tabular-nums; }
+.center { display: flex; justify-content: center; margin-top: auto; padding-top: 8px; }
+
+/* Buttons */
+.btn {
+  font: 600 .9rem/1 var(--font); border-radius: 4px; padding: 9px 14px; cursor: pointer; border: 1px solid transparent;
+}
+.btn.dark { background: var(--dark); color: #fff; }
+.btn.dark:hover:not(:disabled) { background: #173a2b; }
+.btn.dark:disabled { background: #9aa0a6; cursor: not-allowed; }
+#addOil:disabled { background: #fff; color: #9aa0a6; border-color: #9aa0a6; }
+.btn.block { width: 100%; padding: 10px; }
+.btn.small { font-size: .78rem; padding: 6px 10px; }
+.btn.outline { background: #fff; color: #343a40; border-color: #6c757d; border-radius: 6px; }
+.btn.outline:hover { background: #f1f3f5; }
+.file:focus-within { outline: 2px solid #86b7fe; outline-offset: 1px; }
+
+/* Box 6 */
+.recipe { width: 100%; font-size: .9rem; }
+.recipe th, .recipe td { padding: 6px 4px; border-bottom: 1px solid var(--row-line); text-align: start; vertical-align: middle; }
+.recipe thead th { font-weight: 700; border-bottom-color: var(--row-line); padding-bottom: 8px; }
+.recipe td:first-child { width: 58px; white-space: nowrap; }
+.recipe td.name { min-width: 0; }
+.recipe input[type="text"] { width: 68px; height: 26px; padding: 2px 6px; border-radius: 4px; font-size: .82rem; }
+.recipe tfoot th, .recipe tfoot td { font-weight: 700; border-bottom: 0; padding-top: 10px; }
+.sq {
+  width: 20px; height: 20px; padding: 0; border-radius: 3px; font: 700 .8rem/1 var(--font); cursor: pointer;
+  display: inline-grid; place-items: center; vertical-align: middle;
+}
+.sq + .sq { margin-inline-start: 4px; }
+.sq.plus { background: var(--plus); color: #fff; border: 1px solid var(--plus); }
+.sq.minus { background: #fff; color: var(--minus); border: 1px solid var(--minus); }
+.sq:disabled { opacity: .55; cursor: default; }
+.warn { margin: 0; color: var(--minus); font-size: .88rem; border-top: 1px solid var(--row-line); padding-top: 8px; }
+.warn.ok { color: var(--plus); }
+
+.load-row { margin-top: 18px; display: flex; justify-content: center; }
+.btn.green-outline { background: #fff; color: var(--plus); border-color: var(--plus); border-radius: 6px; }
+.btn.green-outline:hover { background: #eef7f2; }
+
+.tabs-opt { font-size: .85rem; }
+
+/* Recipe summary (pale yellow sheet with colour-coded tables) */
+.summary { background: #fdfcd2; padding: 14px; display: flex; flex-direction: column; gap: 12px; }
+.sum-bar { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; flex-wrap: wrap; }
+.sum-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+.sum-opts { display: grid; gap: 6px; font-size: .85rem; }
+.btn.grey { background: #6c757d; color: #fff; }
+.btn.grey:hover { background: #5c636a; }
+.btn.outline-dark { background: #fff; color: #212529; border-color: #343a40; }
+.btn.outline-tan { background: #fff; color: #495057; border-color: #c6b99f; }
+.btn.outline-dark:hover, .btn.outline-tan:hover { background: #f1f3f5; }
+.sum-note { margin: 0; padding: 8px 12px; background: #fff3cd; border: 1px solid #e6cf7a; border-radius: 4px; font-size: .88rem; }
+.json-box { display: grid; gap: 8px; background: #fff; border: 1px solid var(--box-line); padding: 10px; border-radius: 4px; }
+.json-box textarea { width: 100%; font: .8rem/1.4 Consolas, monospace; border: 1px solid var(--field-line); border-radius: 4px; padding: 6px; }
+.nu { display: inline-flex; gap: .3em; align-items: baseline; }
+.sum-brand {
+  display: flex; align-items: center; gap: 14px; background: #fff; border: 1px solid #c9c49a; padding: 8px 12px;
+}
+.sum-brand img { width: 74px; height: auto; flex: none; }
+.sum-brand-text { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.sum-brand-text b { font-size: 1.15rem; color: var(--brand); }
+.sum-brand-line { display: flex; flex-wrap: wrap; gap: 2px 12px; font-size: .88rem; color: #3d4a42; }
+.sum-brand-site { color: var(--brand); font-weight: 600; font-size: .88rem; }
+.sum-title { margin: 0; font: 600 1.25rem/1.3 var(--font); }
+.sum-body { display: flex; flex-direction: column; gap: 10px; }
+
+.frame { border: 1px solid #333; padding: 3px; background: #fff; overflow-x: auto; min-width: 0; }
+.frame.cyan { background: #effdfe; }
+.frame.green { background: #d3e8d3; }
+.kv-grid, .qa-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px 22px; }
+.qa-grid { grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); align-items: start; }
+.sum-table { width: 100%; border-collapse: collapse; font-size: .9rem; }
+.sum-table th, .sum-table td { border: 1px solid #666; padding: 4px 6px; text-align: start; font-weight: 400; font-variant-numeric: tabular-nums; }
+.sum-table thead th { font-weight: 700; }
+.kv td { width: 30%; }
+.kv tr.strong th, .kv tr.strong td { font-weight: 700; }
+.items thead th { background: #dcdcdc; }
+.items tr.water > * { background: #c9f6fb; }
+.items tr.lye > * { background: #f5d6dd; }
+.items tr.oils > * { background: #f5e7b9; }
+.items tr.frag > * { background: #dcdcef; }
+.items tbody td, .oil-list td { width: 13%; }
+.oil-list tbody tr:nth-child(odd) > *, .oil-list tfoot tr > * { background: #e9f9e1; }
+.oil-list tfoot th, .oil-list tfoot td { font-weight: 700; }
+.oil-list td:first-child { width: 4%; }
+.oil-list td:nth-child(2) { width: 4%; text-align: center; }
+.oil-list input[type="checkbox"] { margin: 0; }
+.print-box { display: none; }
+.quality thead th, .quality tbody > tr > * { background: #d3e8d3; }
+.quality td:nth-child(2), .quality td:nth-child(3) { text-align: center; white-space: nowrap; }
+.acids tbody > tr > * { background: #c9f6fb; }
+.acids td:nth-child(2) { text-align: center; width: 15%; }
+.bar-cell { width: 45%; }
+.bar { display: block; height: 14px; background: #e6e7e8; border-radius: 2px; overflow: hidden; }
+.bar > span { display: block; height: 100%; background: #1f8a4c; border-radius: 2px; min-width: 2px; }
+
+.sum-notes { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; border: 1px solid #c9c49a; padding: 8px; }
+.sum-notes label { display: grid; gap: 6px; font-weight: 700; }
+.sum-notes textarea { font: 400 .9rem/1.5 var(--font); border: 1px solid var(--field-line); border-radius: 6px; padding: 8px 10px; resize: vertical; width: 100%; }
+.sum-notes .print-text { display: none; }
+.sum-notes.static p { margin: 4px 0 0; white-space: pre-wrap; }
+
+.inci-title { margin: 0; font: 700 1.2rem/1.3 var(--font); }
+.inci-sub { margin: 4px 0 0; font: 700 1rem/1.3 var(--font); }
+.inci-table { background: #fff; }
+.inci-table th { background: #dcdcdc; }
+.inci-list { margin: 0; background: #fff; border: 1px solid #c9c49a; padding: 10px 12px; text-align: left; }
+.en-small { color: var(--muted); font-size: .8rem; }
+.muted-txt { color: var(--muted); font-size: .85rem; }
+
+/* PDF render target (html2pdf) */
+.print-area { position: absolute; inset-inline-start: -10000px; top: 0; width: 760px; }
+body.pdf-mode .print-area { position: static; }
+body:not(.print-charts) .print-area .bar-cell .bar { display: none; }
+body.print-plain .print-area .frame, body.print-plain .print-area .sum-table *, body.print-plain .print-area { background: #fff !important; }
+.print-area .oil-list input { display: none; }
+.print-area .print-box { display: inline-block; width: 11px; height: 11px; border: 1px solid #333; }
+
+/* Tooltip */
+.tip {
+  position: fixed; z-index: 10; max-width: 260px; background: var(--tip-bg); color: var(--tip-ink);
+  border-radius: 6px; padding: 8px 10px; font-size: .8rem; line-height: 1.5; pointer-events: none;
+}
+.tip b { display: block; margin-bottom: 2px; }
+
+@media (max-width: 760px) {
+  .grid { grid-template-columns: minmax(0, 1fr); }
+  .sheet { padding: 20px 16px 24px; }
+  .kv-grid, .qa-grid, .sum-notes { grid-template-columns: minmax(0, 1fr); }
+  .brand-logo { width: 88px; }
+  .brand-name { font-size: 1.35rem; }
+  .summary { padding: 10px; }
+}
+
+/* Print: only the summary tables and notes */
+@media print {
+  @page { size: letter; margin: 12mm; }
+  body { background: #fff; padding: 0; font-size: 11px; }
+  .sheet { max-width: none; padding: 0; border: 0; }
+  .brand, .foot, .top, .subtitle, .rule, .grid, .load-row, .tip, #inciView,
+  .sum-bar, .sum-note, .json-box, .sum-actions { display: none !important; }
+  .summary { background: #fff; padding: 0; }
+  .frame, .sum-table tr { break-inside: avoid; }
+  .oil-list input { display: none; }
+  .print-box { display: inline-block; width: 10px; height: 10px; border: 1px solid #333; }
+  .sum-notes textarea { display: none; }
+  .sum-notes .print-text { display: block; font-weight: 400; white-space: pre-wrap; min-height: 1.5em; }
+  body:not(.print-charts) .bar-cell .bar { display: none; }
+  body.print-plain .frame, body.print-plain .sum-table *, body.print-plain .summary { background: #fff !important; }
+  * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+}
+@media (max-width: 420px) {
+  .oils-layout { grid-template-columns: minmax(0, 1fr); }
+  .recipe input[type="text"] { width: 58px; }
+}
