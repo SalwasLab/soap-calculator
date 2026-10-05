@@ -21,8 +21,8 @@
   const nu = (a, b) => `<span class="nu"><span>${a}</span><span>${b}</span></span>`;
   const UNIT_SHORT = { g: "غ", oz: "أونصة", lb: "رطل" };
 
-  // Grams → [pounds, ounces, grams] cells.
-  const triple = (g) => `<td>${f(g / G.lb, 3)}</td><td>${f(g / G.oz, 2)}</td><td>${f(g, 2)}</td>`;
+  // Weight cell (grams only).
+  const triple = (g) => `<td>${f(g, 2)}</td>`;
 
   function bar(v) {
     const w = Math.max(0, Math.min(100, v));
@@ -80,7 +80,7 @@
       </div>
 
       <div class="frame"><table class="sum-table items">
-        <thead><tr><th scope="col">البند</th><th scope="col">أرطال</th><th scope="col">أونصات</th><th scope="col">غرامات</th></tr></thead>
+        <thead><tr><th scope="col">البند</th><th scope="col">غرامات</th></tr></thead>
         <tbody>
           <tr class="water"><th scope="row">الماء</th>${triple(res.grams.water)}</tr>
           <tr class="lye"><th scope="row">${nu("القلوي", `<b dir="ltr">${lyeName}</b>`)}</th>${triple(res.grams.lye)}</tr>
@@ -91,7 +91,7 @@
       </table></div>
 
       <div class="frame"><table class="sum-table oil-list">
-        <thead><tr><th scope="col">#</th><th scope="col">✓</th><th scope="col">الزيت / الدهن</th><th scope="col">%</th><th scope="col">أرطال</th><th scope="col">أونصات</th><th scope="col">غرامات</th></tr></thead>
+        <thead><tr><th scope="col">#</th><th scope="col">✓</th><th scope="col">الزيت / الدهن</th><th scope="col">%</th><th scope="col">غرامات</th></tr></thead>
         <tbody>${oils}</tbody>
         <tfoot><tr><td></td><td></td><th scope="row">المجموع</th><td>${f(res.totalPct, 2)}</td>${triple(oilsG)}</tr></tfoot>
       </table></div>

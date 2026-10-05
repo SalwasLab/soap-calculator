@@ -426,25 +426,30 @@
   // Returns the list of oils that couldn't be matched (empty when everything loaded).
   function applyJSON(d) {
     if (!d || typeof d !== "object" || !Array.isArray(d.selectedOils)) throw new Error("bad file");
+    // The calculator works in grams only; files saved in pounds/ounces are converted on load.
     const unitKey = Object.keys(UNIT_NAMES).find((k) => UNIT_NAMES[k] === d.oilWeightUnit) || "g";
-    $("unit").value = unitKey;
-    lastUnit = unitKey;                                    // don't convert the fragrance rate on load
+    const toG = G_PER[unitKey];
+    $("unit").value = "g";
+    lastUnit = "g";
     $(String(d.lyeType).toUpperCase() === "KOH" ? "lyeKoh" : "lyeNaoh").checked = true;
     $("koh90").disabled = String(d.lyeType).toUpperCase() !== "KOH";
     $("koh90Label").classList.toggle("muted", $("koh90").disabled);
     $("koh90").checked = !$("koh90").disabled && !!d.is90KOH;
-    $("oilWeight").value = d.oilWeightValue ?? "";
+    const fileTotal = parseNum(String(d.oilWeightValue));
+    $("oilWeight").value = Number.isFinite(fileTotal) ? +(fileTotal * toG).toFixed(3) : "";
     const mode = Object.keys(WATER_NAMES).find((k) => WATER_NAMES[k] === d.waterOption) || "pct";
     $("waterMode").value = mode;
     $("waterValueLabel").textContent = WATER[mode].label;
     $("waterValue").value = d.waterValue ?? WATER[mode].value;
     $("superfat").value = d.superFat ?? 5;
-    $("fragRate").value = d.fragrance ?? 0;
+    // Fragrance rate: oz/lb in imperial files → g/kg (1 oz/lb = 62.5 g/kg).
+    const frag = parseNum(String(d.fragrance ?? 0));
+    $("fragRate").value = Number.isFinite(frag) ? (unitKey === "g" ? frag : +(frag * 62.5).toFixed(1)) : 0;
     $("recipeName").value = d.recipeName || "";
     extra.additives = d.additives || "";
     extra.notes = d.notes || "";
 
-    const total = parseNum(String(d.oilWeightValue));
+    const total = fileTotal * toG;
     const missing = [];
     state.recipe = Array(SLOTS).fill(null);
     d.selectedOils.slice(0, SLOTS).forEach((s, slot) => {
@@ -455,7 +460,7 @@
       state.recipe[slot] = {
         oil: i,
         pct: Number.isFinite(pct) ? pct : null,
-        wt: Number.isFinite(pct) && Number.isFinite(total) ? (pct / 100) * total : parseNum(String(s.weight)) || 0
+        wt: Number.isFinite(pct) && Number.isFinite(total) ? (pct / 100) * total : (parseNum(String(s.weight)) || 0) * toG
       };
     });
     applyUnit();

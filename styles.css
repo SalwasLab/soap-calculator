@@ -221,7 +221,7 @@ table { border-collapse: collapse; }
 .items tr.lye > * { background: #f5d6dd; }
 .items tr.oils > * { background: #f5e7b9; }
 .items tr.frag > * { background: #dcdcef; }
-.items tbody td, .oil-list td { width: 13%; }
+.items tbody td, .oil-list td { width: 18%; }
 .oil-list tbody tr:nth-child(odd) > *, .oil-list tfoot tr > * { background: #e9f9e1; }
 .oil-list tfoot th, .oil-list tfoot td { font-weight: 700; }
 .oil-list td:first-child { width: 4%; }

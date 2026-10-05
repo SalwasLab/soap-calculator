@@ -54,15 +54,12 @@
     <section class="box" aria-labelledby="h-weight">
       <h2 id="h-weight">2. وزن الزيوت <button class="q" type="button" aria-expanded="false" aria-controls="help-weight" aria-label="شرح وزن الزيوت">؟</button></h2>
       <div class="help" id="help-weight" hidden>
-        <p>أدخل الوزن الإجمالي لكل الزيوت والدهون في الوصفة، بالرطل أو الأونصة أو الغرام.</p>
-        <p>أيًّا كانت الوحدة التي تختارها، يعرض ملخص الوصفة النتائج بالأرطال والأونصات والغرامات معًا.</p>
+        <p>أدخل الوزن الإجمالي لكل الزيوت والدهون والشموع في الوصفة بالغرام.</p>
+        <p>كل الكميات في الحاسبة وفي ملخص الوصفة بالغرام.</p>
       </div>
       <div class="stack">
-        <select id="unit" aria-label="وحدة الوزن">
-          <option value="lb">أرطال</option>
-          <option value="oz">أونصات</option>
-          <option value="g" selected>غرامات</option>
-        </select>
+        <input type="hidden" id="unit" value="g">
+        <label for="oilWeight">الوزن الإجمالي بالغرام</label>
         <div class="group">
           <input id="oilWeight" type="text" inputmode="decimal" value="500" aria-label="الوزن الإجمالي للزيوت">
           <span class="addon" data-unit>غ</span>
