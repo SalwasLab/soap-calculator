@@ -109,9 +109,16 @@
     .replace(/[أإآ]/g, "ا").replace(/ى/g, "ي").replace(/ة/g, "ه");
 
   // Alphabetical by Arabic name, ignoring a leading "ال" (so "السمن" sorts under س).
+  // An oil in LISTED_AFTER is placed directly below the named oil instead.
+  const LISTED_AFTER = { "Olive Oil pomace": "Olive Oil" };
   const sortKey = (s) => s.replace(/^ال/, "");
+  const anchor = (i) => {
+    const after = LISTED_AFTER[window.OILS[i].en];
+    return after ? window.OILS.find((o) => o.en === after) : window.OILS[i];
+  };
   const order = window.OILS.map((o, i) => i)
-    .sort((a, b) => sortKey(window.OILS[a].ar).localeCompare(sortKey(window.OILS[b].ar), "ar"));
+    .sort((a, b) => sortKey(anchor(a).ar).localeCompare(sortKey(anchor(b).ar), "ar") ||
+      (LISTED_AFTER[window.OILS[a].en] ? 1 : 0) - (LISTED_AFTER[window.OILS[b].en] ? 1 : 0));
 
   $("oilSelect").innerHTML = order.map((i) =>
     `<option value="${i}" title="${window.OILS[i].en}">${window.OILS[i].ar}</option>`).join("");
