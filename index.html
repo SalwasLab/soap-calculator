@@ -61,7 +61,7 @@
         <input type="hidden" id="unit" value="g">
         <label for="oilWeight">الوزن الإجمالي بالغرام</label>
         <div class="group">
-          <input id="oilWeight" type="text" inputmode="decimal" value="500" aria-label="الوزن الإجمالي للزيوت">
+          <input id="oilWeight" type="text" inputmode="decimal" value="0" aria-label="الوزن الإجمالي للزيوت">
           <span class="addon" data-unit>غ</span>
         </div>
       </div>
@@ -84,7 +84,7 @@
           <option value="ratio">نسبة الماء إلى القلوي</option>
         </select>
         <label for="waterValue" id="waterValueLabel">أدخل النسبة % (مثلًا 38)</label>
-        <input id="waterValue" type="text" inputmode="decimal" value="38">
+        <input id="waterValue" type="text" inputmode="decimal" value="0">
       </div>
     </section>
 
@@ -98,14 +98,14 @@
       <div class="form-rows">
         <label for="superfat">الدهن الزائد (%)</label>
         <div class="group">
-          <input id="superfat" type="text" inputmode="decimal" value="5">
+          <input id="superfat" type="text" inputmode="decimal" value="0">
           <span class="addon">%</span>
         </div>
         <label for="fragRate" id="fragRateLabel">العطر (غ/كغ)</label>
-        <input id="fragRate" type="text" inputmode="decimal" value="31">
+        <input id="fragRate" type="text" inputmode="decimal" value="0">
         <label for="fragAmount">كمية العطر</label>
         <div class="group">
-          <input id="fragAmount" type="text" value="15.5" readonly>
+          <input id="fragAmount" type="text" value="0" readonly>
           <span class="addon" data-unit>غ</span>
         </div>
       </div>
@@ -138,7 +138,7 @@
         </div>
       </div>
       <div class="center">
-        <button type="button" class="btn dark" id="addOil">أضف إلى الوصفة</button>
+        <button type="button" class="btn dark" id="addOil" disabled>أضف إلى الوصفة</button>
       </div>
     </section>
 

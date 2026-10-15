@@ -127,7 +127,6 @@
   ["additives", "notes"].forEach((id) => $(id).addEventListener("input", () => {
     sc.extra[id] = $(id).value;
     document.querySelector(`.print-text[data-for="${id}"]`).textContent = $(id).value;
-    sc.autosave();
   }));
 
   function openSummary() {

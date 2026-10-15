@@ -389,9 +389,9 @@
   }));
 
   const WATER = {
-    pct:   { label: "أدخل النسبة % (مثلًا 38)",  value: "38" },
-    conc:  { label: "أدخل التركيز % (مثلًا 33)", value: "33" },
-    ratio: { label: "أدخل النسبة (مثلًا 2:1)",   value: "2:1" }
+    pct:   { label: "أدخل النسبة % (مثلًا 38)",  value: "0" },
+    conc:  { label: "أدخل التركيز % (مثلًا 33)", value: "0" },
+    ratio: { label: "أدخل النسبة (مثلًا 2:1)",   value: "0" }
   };
   $("waterMode").addEventListener("change", () => {
     const m = WATER[$("waterMode").value];
@@ -448,7 +448,7 @@
     $("waterMode").value = mode;
     $("waterValueLabel").textContent = WATER[mode].label;
     $("waterValue").value = d.waterValue ?? WATER[mode].value;
-    $("superfat").value = d.superFat ?? 5;
+    $("superfat").value = d.superFat ?? 0;
     // Fragrance rate: oz/lb in imperial files → g/kg (1 oz/lb = 62.5 g/kg).
     const frag = parseNum(String(d.fragrance ?? 0));
     $("fragRate").value = Number.isFinite(frag) ? (unitKey === "g" ? frag : +(frag * 62.5).toFixed(1)) : 0;
@@ -492,28 +492,14 @@
     reader.readAsText(file);
   });
 
-  // Remember the last recipe in this browser (best effort; storage may be unavailable).
-  const STORE_KEY = "soap-calc-ar:last";
-  let saveTimer = 0;
-  function autosave() {
-    clearTimeout(saveTimer);
-    saveTimer = setTimeout(() => {
-      try { localStorage.setItem(STORE_KEY, JSON.stringify(toJSON())); } catch (e) { /* ignore */ }
-    }, 300);
-  }
-  document.addEventListener("input", autosave);
-  document.addEventListener("change", autosave);
-  document.addEventListener("click", (e) => { if (e.target.closest("button")) autosave(); });
+  // The page always opens empty: no oil selected and every input at zero. Drop any recipe
+  // an earlier version remembered in this browser.
+  try { localStorage.removeItem("soap-calc-ar:last"); } catch (e) { /* ignore */ }
 
   // ---------- Boot ----------
   window.soapCalc = {
-    compute, recalc, PROPS, G_PER, UNIT, state, extra, toJSON, applyJSON, autosave, last: null
+    compute, recalc, PROPS, G_PER, UNIT, state, extra, toJSON, applyJSON, last: null
   };
-  selectOil(order[0]);
   applyUnit();
   renderSlots();
-  try {
-    const saved = localStorage.getItem(STORE_KEY);
-    if (saved) applyJSON(JSON.parse(saved));
-  } catch (e) { /* ignore */ }
 })();
